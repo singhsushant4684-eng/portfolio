@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sushant Singh | Portfolio</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome (icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <meta name="theme-color" content="#121212">
+</head>
+<body>
+
+  <!-- Accessible skip link -->
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-container">
+      <a class="logo" href="#hero" aria-label="Sushant Singh home">Sushant.dev</a>
+
+      <button class="menu-icon" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="links" id="navLinks" role="navigation" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main id="main">
+    <!-- HERO -->
+    <section id="hero" class="hero section">
+      <canvas id="heroCanvas" aria-hidden="true"></canvas>
+
+      <div class="hero-inner">
+        <h1 class="hero-title">Hello, I’m <span class="name">Sushant Singh</span></h1>
+        <p class="subtitle">Beginner web developer — building beautiful frontends & learning DSA.</p>
+        <div class="hero-ctas">
+          <a href="#projects" class="btn primary">View My Work</a>
+          <a href="#contact" class="btn ghost">Contact Me</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <h2>About Me</h2>
+      <div class="about-grid">
+        <div class="about-card">
+          <p>Hello! I’m <strong>Sushant Singh</strong>, an aspiring frontend developer from VIT. I enjoy building interactive UI, learning React, and improving my algorithm skills. I love clean design, subtle animations and making things delightful to use.</p>
+
+          <ul class="stats">
+            <li><strong>Frontend</strong><span>HTML · CSS · JS</span></li>
+            <li><strong>Learning</strong><span>React · Vite</span></li>
+            <li><strong>DSA</strong><span>Practice daily</span></li>
+          </ul>
+
+          <div class="about-actions">
+            <a class="btn" href="https://github.com/" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+            <a class="btn" href="https://linkedin.com" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i> LinkedIn</a>
+          </div>
+        </div>
+
+        <div class="about-profile">
+          <!-- put your profile image in the same folder and set filename (optional) -->
+          <div class="avatar">
+            <!-- fallback initials -->
+            <span>SS</span>
+          </div>
+          <p class="quote">“Curious builder & lifelong learner — I solve problems one line of code at a time.”</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section">
+      <h2>Skills</h2>
+      <div class="skills-wrap">
+        <div class="skill" data-skill="90"><i class="fab fa-html5"></i><span>HTML</span></div>
+        <div class="skill" data-skill="88"><i class="fab fa-css3-alt"></i><span>CSS</span></div>
+        <div class="skill" data-skill="78"><i class="fab fa-js-square"></i><span>JavaScript</span></div>
+        <div class="skill" data-skill="50"><i class="fab fa-react"></i><span>React</span></div>
+        <div class="skill" data-skill="70"><i class="fas fa-code"></i><span>C/C++</span></div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <article class="card">
+          <h3>Sorting Visualizer</h3>
+          <p>A visual tool showing bubble sort & other sorts with animations.</p>
+          <div class="card-actions">
+            <a href="#" class="btn primary small">Demo</a>
+            <a href="#" class="btn small">Source</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Portfolio Website</h3>
+          <p>This site — built with dark-mode styles, glassmorphism and smooth animations.</p>
+          <div class="card-actions">
+            <a href="#" class="btn primary small">View</a>
+          </div>
+        </article>
+
+        <!-- add more project cards as needed -->
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <h2>Contact</h2>
+      <div class="contact-wrap">
+        <p>If you'd like to work together or say hi, email me at <a href="mailto:singhsushant4684@gmail.com">singhsushant4684@gmail.com</a>.</p>
+        <form id="contactForm" class="contact-form" onsubmit="return false;">
+          <input type="text" name="name" placeholder="Your name" required>
+          <input type="email" name="email" placeholder="Email" required>
+          <textarea name="message" placeholder="Message" rows="4" required></textarea>
+          <button class="btn primary" type="submit">Send</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made with ❤️ by Sushant • <small>Built with HTML, CSS & JavaScript</small></p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
+<!-- Floating decorative shapes -->
+<div class="floating-shape shape1"></div>
+<div class="floating-shape shape2"></div>
+<div class="floating-shape shape3"></div>
+<div class="floating-shape shape4"></div>
+<div class="floating-shape shape5"></div>
+
+<!-- Your existing content -->
+<section class="hero">
+  <h1>Hello, I’m Sushant</h1>
+  <p>Frontend Developer | Web Designer</p>
+</section>

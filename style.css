@@ -23,7 +23,7 @@ body{
   line-height:1.5;
   padding-top:72px;
   width: 100%;
-  overflow-x: hidden; /* prevent horizontal scroll */
+  overflow-x: hidden;
 }
 a{ color:var(--accent); text-decoration:none; }
 a:hover{ color:#ff4757; }
@@ -117,7 +117,6 @@ nav{
 
 .about-actions{ display:flex; gap:12px; justify-content:center; margin-top:6px; }
 
-/* profile column */
 .about-profile{ display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center; }
 .avatar{ width:160px; height:160px; border-radius:20px; background:linear-gradient(135deg, rgba(37,117,252,0.08), rgba(255,107,107,0.06)); display:flex; align-items:center; justify-content:center; font-size:2.4rem; color:var(--accent); border:1px solid rgba(255,255,255,0.03); }
 .quote{ color:#bfc9d8; font-style:italic; }
@@ -143,6 +142,48 @@ nav{
 .card p{ color:#c9d6e9; margin-bottom:12px; }
 .card-actions{ display:flex; gap:8px; }
 
+/* ================ ACHIEVEMENTS ================= */
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  align-items: stretch;
+}
+
+.achievement-card {
+  background: linear-gradient(135deg, rgba(255,107,107,0.1), rgba(37,117,252,0.1));
+  border-radius: 16px;
+  padding: 24px 16px;
+  text-align: center;
+  color: #e6eef8;
+  border: 1px solid rgba(255,255,255,0.05);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.achievement-card i {
+  font-size: 2rem;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.achievement-card h3 {
+  margin-bottom: 6px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.achievement-card p {
+  color: #cbd6e3;
+  font-size: 0.95rem;
+}
+
+.achievement-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
 /* ================ CONTACT ================ */
 .contact-wrap{
   text-align:center;
@@ -151,8 +192,8 @@ nav{
 }
 .contact-form{
   display:flex;
-  flex-direction:column; /* stack vertically */
-  gap:16px; /* spacing */
+  flex-direction:column;
+  gap:16px;
   margin-top:14px;
   width:100%;
   max-width:400px;
@@ -241,3 +282,6 @@ footer{ text-align:center; padding:28px 12px; color:#bfcbdc; border-top:1px soli
   50%{ transform:translateY(-30px) translateX(-10px); }
   75%{ transform:translateY(-15px) translateX(5px); }
 }
+
+
+

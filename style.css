@@ -145,11 +145,10 @@ nav{
 /* ================ ACHIEVEMENTS ================= */
 .achievements-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 20px;
-  justify-items: stretch;
+  justify-items: center;
   align-items: stretch;
-  width: 100%;
 }
 
 .achievement-card {
@@ -161,10 +160,10 @@ nav{
   border: 1px solid rgba(255,255,255,0.05);
   box-shadow: 0 12px 30px rgba(0,0,0,0.5);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  opacity: 1; /* make always visible */
+  transform: translateY(0); /* reset any translation */
+  position: relative;
+  z-index: 1;
 }
 
 .achievement-card i {
@@ -259,16 +258,6 @@ footer{ text-align:center; padding:28px 12px; color:#bfcbdc; border-top:1px soli
 
   .skills-wrap{ gap:10px; justify-content:center; }
   .skill{ width:120px; padding:14px; }
-
-  .achievements-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 480px) {
-  .achievements-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* ================ ANIMATIONS ================ */
@@ -297,3 +286,5 @@ footer{ text-align:center; padding:28px 12px; color:#bfcbdc; border-top:1px soli
   50%{ transform:translateY(-30px) translateX(-10px); }
   75%{ transform:translateY(-15px) translateX(5px); }
 }
+
+

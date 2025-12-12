@@ -1,4 +1,4 @@
-/* NAVIGATION: toggle mobile menu */
+/* ================== NAVIGATION ================== */
 const menuBtn = document.getElementById('menuBtn');
 const navLinks = document.getElementById('navLinks');
 
@@ -8,7 +8,6 @@ menuBtn.addEventListener('click', () => {
   navLinks.classList.toggle('active');
 });
 
-/* CLOSE MENU on link click (mobile) */
 document.querySelectorAll('#navLinks a').forEach(a => {
   a.addEventListener('click', () => {
     navLinks.classList.remove('active');
@@ -16,7 +15,7 @@ document.querySelectorAll('#navLinks a').forEach(a => {
   });
 });
 
-/* IntersectionObserver for sections */
+/* ================== SECTION ANIMATIONS ================== */
 const sections = document.querySelectorAll('.section');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -25,7 +24,7 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.18 });
 sections.forEach(s => observer.observe(s));
 
-/* HERO: animate title on load */
+/* ================== HERO TITLE ANIMATION ================== */
 window.addEventListener('DOMContentLoaded', () => {
   const heroTitle = document.querySelector('.hero-title');
   if (heroTitle) {
@@ -39,70 +38,59 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-/* HERO PARTICLES: lightweight canvas background */
+/* ================== HERO PARTICLES 3D ================== */
 (() => {
   const canvas = document.getElementById('heroCanvas');
   if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let w, h, particles;
 
-  const resize = () => {
-    w = canvas.width = canvas.clientWidth * devicePixelRatio;
-    h = canvas.height = canvas.clientHeight * devicePixelRatio;
-    ctx.scale(devicePixelRatio, devicePixelRatio);
-  };
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
+  camera.position.z = 5;
 
-  function createParticles() {
-    const count = Math.max(18, Math.floor((canvas.clientWidth / 80)));
-    particles = [];
-    for (let i = 0; i < count; i++) {
-      particles.push({
-        x: Math.random() * canvas.clientWidth,
-        y: Math.random() * canvas.clientHeight,
-        r: 1 + Math.random() * 3,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.2) * 0.4,
-        hue: 200 + Math.random() * 160
-      });
-    }
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+
+  // Lights
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+  const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+  dirLight.position.set(3, 3, 3);
+  scene.add(ambientLight, dirLight);
+
+  // Particle geometry
+  const particleGeo = new THREE.SphereGeometry(0.06, 12, 12);
+  const particleMat = new THREE.MeshStandardMaterial({ color: 0x2575fc, transparent: true, opacity: 0.7 });
+  const particles = [];
+
+  for (let i = 0; i < 60; i++) {
+    const p = new THREE.Mesh(particleGeo, particleMat);
+    p.position.set((Math.random() - 0.5) * 6, (Math.random() - 0.5) * 3, (Math.random() - 0.5) * 2);
+    scene.add(p);
+    particles.push({ mesh: p, vx: (Math.random() - 0.5) * 0.01, vy: (Math.random() - 0.5) * 0.01 });
   }
 
-  function draw() {
-    if (!ctx) return;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (let p of particles) {
-      ctx.beginPath();
-      const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 6);
-      grad.addColorStop(0, `hsla(${p.hue},80%,70%,0.12)`);
-      grad.addColorStop(1, `hsla(${p.hue},80%,50%,0)`);
-      ctx.fillStyle = grad;
-      ctx.arc(p.x, p.y, p.r * 2, 0, Math.PI * 2);
-      ctx.fill();
-
-      // move
-      p.x += p.vx;
-      p.y += p.vy;
-
-      // wrap
-      if (p.x < -20) p.x = canvas.clientWidth + 20;
-      if (p.x > canvas.clientWidth + 20) p.x = -20;
-      if (p.y < -20) p.y = canvas.clientHeight + 20;
-      if (p.y > canvas.clientHeight + 20) p.y = -20;
-    }
-    requestAnimationFrame(draw);
+  function animate() {
+    requestAnimationFrame(animate);
+    particles.forEach(p => {
+      p.mesh.position.x += p.vx;
+      p.mesh.position.y += p.vy;
+      if (p.mesh.position.x > 3) p.mesh.position.x = -3;
+      if (p.mesh.position.x < -3) p.mesh.position.x = 3;
+      if (p.mesh.position.y > 2) p.mesh.position.y = -2;
+      if (p.mesh.position.y < -2) p.mesh.position.y = 2;
+    });
+    renderer.render(scene, camera);
   }
+  animate();
 
-  const onResize = () => {
-    resize();
-    createParticles();
-  };
-
-  onResize();
-  window.addEventListener('resize', onResize);
-  draw();
+  window.addEventListener('resize', () => {
+    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+    camera.aspect = canvas.clientWidth / canvas.clientHeight;
+    camera.updateProjectionMatrix();
+  });
 })();
 
-/* SKILL animation: small visual feedback (no bars, just stagger reveals) */
+/* ================== SKILLS STAGGER ANIMATION ================== */
 (() => {
   const skills = document.querySelectorAll('.skill');
   skills.forEach((el, i) => {
@@ -116,7 +104,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 })();
 
-/* CONTACT FORM - fake submission (UI feedback) */
+/* ================== CONTACT FORM ================== */
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
   contactForm.addEventListener('submit', (e) => {
@@ -126,13 +114,30 @@ if (contactForm) {
     btn.disabled = true;
     setTimeout(() => {
       btn.textContent = 'Sent ✓';
-      btn.style.background = 'linear-gradient(90deg,#6a11cb,#2575fc)';
       setTimeout(() => {
         btn.textContent = 'Send';
         btn.disabled = false;
-        btn.style.background = ''; // revert to CSS default
         contactForm.reset();
       }, 1600);
     }, 800);
   });
 }
+
+/* ================== ACHIEVEMENTS ANIMATION ================== */
+const achievementCards = document.querySelectorAll('.achievement-card');
+const achievementObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = 0;
+      entry.target.style.transform = 'translateY(20px)';
+      setTimeout(() => {
+        entry.target.style.transition = 'all 600ms cubic-bezier(.2,.9,.2,1)';
+        entry.target.style.opacity = 1;
+        entry.target.style.transform = 'translateY(0)';
+      }, 100);
+      achievementObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.2 });
+
+achievementCards.forEach(card => achievementObserver.observe(card));
